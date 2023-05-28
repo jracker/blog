@@ -1,5 +1,5 @@
 ---
-title: "blog"
+title: "jrds"
 listing:
   contents: posts
   sort: "date desc"

@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "jrds",
+    "title": "Posts",
     "section": "",
     "text": "No matching items"
   },
@@ -12,5 +12,12 @@
     "title": "About",
     "section": "",
     "text": "About this blog"
+  },
+  {
+    "objectID": "posts.html",
+    "href": "posts.html",
+    "title": "jrds",
+    "section": "",
+    "text": "title: \"Notas\"\nlisting: \n  contents: posts \n  type: grid \n  sort: \"date desc\" \n  categories: true"
   }
 ]

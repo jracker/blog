@@ -22,7 +22,7 @@ format:
     css: styles.css
     theme: 
       light: [litera, custom.scss]
-      #dark: [solar, custom.scss]
+      # dark: [solar, custom.scss]
     highlight-style: gruvbox
     smooth-scroll: true
     

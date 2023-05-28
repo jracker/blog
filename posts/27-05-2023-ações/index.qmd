@@ -31,13 +31,12 @@ for(pckgs in pacotes){
 
 ### Pré-processamento dos dados
 
+Os dados com os preços de fechamento das ações e o arquivo com os nomes das ações são carregados.
+
 ```{r}
 closePriceFile_path <- here(paste0("data","2020closePrice SAX-240_60_10.csv"))
-
-
 dat <- read.csv(closePriceFile_path) %>%
   select(-c(X, X45))
-
 dat.cols <- read.table(
   dat,
   header = FALSE,
@@ -46,3 +45,11 @@ dat.cols <- read.table(
 )
 
 ```
+
+As colunas do quadro de dado \`dat\` são renomeadas com os nomes das empresas presentes em \`dat.cols\`.
+
+As células com informações de ações que tiveram fechamento abaixo e acima da média são substituídas:
+
+-   0 - Ações com preço de fechamento **abaixo** da média
+
+-   1 - Ações com preço de fechamento **acima** da média

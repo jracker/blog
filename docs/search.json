@@ -4,14 +4,14 @@
     "href": "index.html",
     "title": "Posts",
     "section": "",
-    "text": "No matching items"
+    "text": "Análise de ações do mercado brasileiro usando Apriori e clustering\n\n\n\n\n\n\n\nRegras de associação\n\n\nClustering\n\n\nMineração de dados\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "Learning notes."
   },
   {
     "objectID": "posts.html",
@@ -19,5 +19,12 @@
     "title": "jrds",
     "section": "",
     "text": "title: \"Notas\"\nlisting: \n  contents: posts \n  type: grid \n  sort: \"date desc\" \n  categories: true"
+  },
+  {
+    "objectID": "posts/27-05-2023-ações/index.html",
+    "href": "posts/27-05-2023-ações/index.html",
+    "title": "Análise de ações do mercado brasileiro usando Apriori e clustering",
+    "section": "",
+    "text": "Dependências\nInicialmente devemos carregar as dependêncais, o código a seguir irá baixá-las caso elas não estejam instaladas.\n\npacotes <- c(\n  \"arules\",\n  \"tidyverse\",\n  \"arulesViz\",\n  \"skimr\",\n  \"readr\",\n  \"here\",\n  \"readr\",\n  \"here\"\n)\n\nfor(pckgs in pacotes){\n  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)\n  library(pckgs,character.only = TRUE)\n}\n\n\n\nPré-processamento dos dados\n\nclosePriceFile_path <- here(paste0(\"data\",\"2020closePrice SAX-240_60_10.csv\"))\n\n\ndat <- read.csv(closePriceFile_path) %>%\n  select(-c(X, X45))\n\ndat.cols <- read.table(\n  dat,\n  header = FALSE,\n  sep = \"\\t\",\n  fileEncoding = \"latin1\"\n)"
   }
 ]

@@ -1,0 +1,14 @@
+{
+  "hash": "b90fbc64dc91f4874c8013bacc102673",
+  "result": {
+    "markdown": "---\ntitle: \"Análise de ações do mercado brasileiro usando Apriori e clustering\"\nimage: image.jpg\ncategories: [Regras de associação, Clustering, Mineração de dados]\nexecute: \n  eval: false\n---\n\n\n### Dependências \n\nInicialmente devemos carregar as dependêncais, o código a seguir irá baixá-las caso elas não estejam instaladas.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacotes <- c(\n  \"arules\",\n  \"tidyverse\",\n  \"arulesViz\",\n  \"skimr\",\n  \"readr\",\n  \"here\",\n  \"readr\",\n  \"here\"\n)\n\nfor(pckgs in pacotes){\n  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)\n  library(pckgs,character.only = TRUE)\n}\n```\n:::\n\n\n### Pré-processamento dos dados\n\n\n::: {.cell}\n\n```{.r .cell-code}\nclosePriceFile_path <- here(paste0(\"data\",\"2020closePrice SAX-240_60_10.csv\"))\n\n\ndat <- read.csv(closePriceFile_path) %>%\n  select(-c(X, X45))\n\ndat.cols <- read.table(\n  dat,\n  header = FALSE,\n  sep = \"\\t\",\n  fileEncoding = \"latin1\"\n)\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,48 @@
+---
+title: "Análise de ações do mercado brasileiro usando Apriori e clustering"
+image: image.jpg
+categories: [Regras de associação, Clustering, Mineração de dados]
+execute: 
+  eval: false
+---
+
+### Dependências 
+
+Inicialmente devemos carregar as dependêncais, o código a seguir irá baixá-las caso elas não estejam instaladas.
+
+```{r}
+pacotes <- c(
+  "arules",
+  "tidyverse",
+  "arulesViz",
+  "skimr",
+  "readr",
+  "here",
+  "readr",
+  "here"
+)
+
+for(pckgs in pacotes){
+  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)
+  library(pckgs,character.only = TRUE)
+}
+
+```
+
+### Pré-processamento dos dados
+
+```{r}
+closePriceFile_path <- here(paste0("data","2020closePrice SAX-240_60_10.csv"))
+
+
+dat <- read.csv(closePriceFile_path) %>%
+  select(-c(X, X45))
+
+dat.cols <- read.table(
+  dat,
+  header = FALSE,
+  sep = "\t",
+  fileEncoding = "latin1"
+)
+
+```

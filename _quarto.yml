@@ -3,19 +3,28 @@ project:
   output-dir: docs
 
 website:
-  title: "jrds"
+  title: ""
   navbar:
+    logo: "assets/owl.png"
     right:
       - index.qmd
       - about.qmd
       - icon: github
         href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+    menu:
+      - text: Source Code
+        url: https://github.com/jracker/blog
+      - text: Report a bug
+        url: https://github.com/jracker/blog/issues
+
 format:
   html:
-    theme: solar
     css: styles.css
-
+    theme: 
+      light: [litera, custom.scss]
+      #dark: [solar, custom.scss]
+    highlight-style: gruvbox
+    smooth-scroll: true
+    
 editor: visual
 

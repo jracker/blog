@@ -1,14 +1,14 @@
 ---
-title: "Análise de ações do mercado brasileiro usando Apriori e clustering"
+title: "Simple clustering and data mining with stocks from the brazilian market"
 image: image.jpg
-categories: [Regras de associação, Clustering, Mineração de dados]
+categories: [Association Rules, Clustering, Data Mining]
 execute: 
   eval: false
 ---
 
-### Dependências 
+### Dependencies
 
-Inicialmente devemos carregar as dependêncais, o código a seguir irá baixá-las caso elas não estejam instaladas.
+Initially we load all the project dependencies, the following code will do that for us and in case they aren't installed it'll installed all the required packages.
 
 ```{r}
 pacotes <- c(
@@ -29,9 +29,9 @@ for(pckgs in pacotes){
 
 ```
 
-### Pré-processamento dos dados
+### Data pre-processing
 
-Os dados com os preços de fechamento das ações e o arquivo com os nomes das ações são carregados.
+In this step the data with the closing price for the stocks and their corresponding names are loaded.
 
 ```{r}
 closePriceFile_path <- here(paste0("data","2020closePrice SAX-240_60_10.csv"))
@@ -46,10 +46,8 @@ dat.cols <- read.table(
 
 ```
 
-As colunas do quadro de dado \`dat\` são renomeadas com os nomes das empresas presentes em \`dat.cols\`.
+The dataframe columns are renamed with the names loaded in the variable "dat.cols". We substitute the values with the closing price below and above average.
 
-As células com informações de ações que tiveram fechamento abaixo e acima da média são substituídas:
+-   0 - Stocks with closing price **below** average
 
--   0 - Ações com preço de fechamento **abaixo** da média
-
--   1 - Ações com preço de fechamento **acima** da média
+-   1 - Stocks with closing price **above** average

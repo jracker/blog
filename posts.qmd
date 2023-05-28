@@ -1,8 +1,10 @@
 ```         
-title: "Notas"
+title: "Learning notes"
+subtitle: "Some notes about my learning along the way"
 listing: 
   contents: posts 
-  type: grid 
+  type: default
   sort: "date desc" 
-  categories: true 
+  categories: true
+page-layout: full
 ```

@@ -2,29 +2,57 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Posts",
+    "title": "Notes",
     "section": "",
-    "text": "Análise de ações do mercado brasileiro usando Apriori e clustering\n\n\n\n\n\n\n\nRegras de associação\n\n\nClustering\n\n\nMineração de dados\n\n\n\n\n\n\n\n\n\n \n\n\n\n\nNo matching items"
+    "text": "Apriori algorithm - Association mining rule\n\n\n5 min\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSimple clustering and data mining with stocks from the brazilian market\n\n\n0 min\n\n\n\n\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Learning notes."
+    "text": "I’m a telecommunications engineer currently working as an IoT backend developer."
   },
   {
     "objectID": "posts.html",
     "href": "posts.html",
-    "title": "jrds",
+    "title": "",
     "section": "",
-    "text": "title: \"Notas\"\nlisting: \n  contents: posts \n  type: grid \n  sort: \"date desc\" \n  categories: true"
+    "text": "title: \"Learning notes\"\nsubtitle: \"Some notes about my learning along the way\"\nlisting: \n  contents: posts \n  type: default\n  sort: \"date desc\" \n  categories: true\npage-layout: full"
   },
   {
     "objectID": "posts/27-05-2023-ações/index.html",
     "href": "posts/27-05-2023-ações/index.html",
-    "title": "Análise de ações do mercado brasileiro usando Apriori e clustering",
+    "title": "Simple clustering and data mining with stocks from the brazilian market",
     "section": "",
-    "text": "Dependências\nInicialmente devemos carregar as dependêncais, o código a seguir irá baixá-las caso elas não estejam instaladas.\n\npacotes <- c(\n  \"arules\",\n  \"tidyverse\",\n  \"arulesViz\",\n  \"skimr\",\n  \"readr\",\n  \"here\",\n  \"readr\",\n  \"here\"\n)\n\nfor(pckgs in pacotes){\n  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)\n  library(pckgs,character.only = TRUE)\n}\n\n\n\nPré-processamento dos dados\nOs dados com os preços de fechamento das ações e o arquivo com os nomes das ações são carregados.\n\nclosePriceFile_path <- here(paste0(\"data\",\"2020closePrice SAX-240_60_10.csv\"))\ndat <- read.csv(closePriceFile_path) %>%\n  select(-c(X, X45))\ndat.cols <- read.table(\n  dat,\n  header = FALSE,\n  sep = \"\\t\",\n  fileEncoding = \"latin1\"\n)\n\nAs colunas do quadro de dado `dat` são renomeadas com os nomes das empresas presentes em `dat.cols`.\nAs células com informações de ações que tiveram fechamento abaixo e acima da média são substituídas:\n\n0 - Ações com preço de fechamento abaixo da média\n1 - Ações com preço de fechamento acima da média"
+    "text": "Dependencies\nInitially we load all the project dependencies, the following code will do that for us and in case they aren’t installed it’ll installed all the required packages.\n\npacotes <- c(\n  \"arules\",\n  \"tidyverse\",\n  \"arulesViz\",\n  \"skimr\",\n  \"readr\",\n  \"here\",\n  \"readr\",\n  \"here\"\n)\n\nfor(pckgs in pacotes){\n  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)\n  library(pckgs,character.only = TRUE)\n}\n\n\n\nData pre-processing\nIn this step the data with the closing price for the stocks and their corresponding names are loaded.\n\nclosePriceFile_path <- here(paste0(\"data\",\"2020closePrice SAX-240_60_10.csv\"))\ndat <- read.csv(closePriceFile_path) %>%\n  select(-c(X, X45))\ndat.cols <- read.table(\n  dat,\n  header = FALSE,\n  sep = \"\\t\",\n  fileEncoding = \"latin1\"\n)\n\nThe dataframe columns are renamed with the names loaded in the variable “dat.cols”. We substitute the values with the closing price below and above average.\n\n0 - Stocks with closing price below average\n1 - Stocks with closing price above average"
+  },
+  {
+    "objectID": "posts/28-05-2023-apriori/index.html",
+    "href": "posts/28-05-2023-apriori/index.html",
+    "title": "Apriori algorithm - Association mining rule",
+    "section": "",
+    "text": "Inicialmente são carregadas/instaladas as bibliotecas que serão usadas.\n\npacotes <- c(\n  \"arules\",\n  \"tidyverse\",\n  \"arulesViz\",\n  \"skimr\",\n  \"readr\",\n  \"here\",\n  \"readr\",\n  \"here\"\n)\n\nfor(pckgs in pacotes){\n  if(!require(pckgs,character.only = TRUE)) install.packages(pckgs)\n  library(pckgs,character.only = TRUE)\n}"
+  },
+  {
+    "objectID": "posts/28-05-2023-apriori/index.html#descrição-dos-dados",
+    "href": "posts/28-05-2023-apriori/index.html#descrição-dos-dados",
+    "title": "Apriori algorithm - Association mining rule",
+    "section": "Descrição dos dados",
+    "text": "Descrição dos dados\nOs dados disponibilizados descrevem resultados de múltiplas partidas com informações dos jogadores presentes. O objetivo é extrair informações como os melhores/piores jogadores aplicando o algoritmo apriori."
+  },
+  {
+    "objectID": "posts/28-05-2023-apriori/index.html#pré-processamento-dos-dados",
+    "href": "posts/28-05-2023-apriori/index.html#pré-processamento-dos-dados",
+    "title": "Apriori algorithm - Association mining rule",
+    "section": "Pré-processamento dos dados",
+    "text": "Pré-processamento dos dados\nOs dados são importados e as células sem informação são tratadas como NA.\n\n\n\n\n# Importa o arquivo csv e trata as linhas em branco como NA\nfpath <- here(paste0(mpath,\"_ASSOC_PadelStars.csv\"))\ndat <- read.csv(fpath) %>%\n  na_if(\"\")\n\n# View(dat) # Visualizar o formato dos dados\n\nhead(dat, n = 10)\n\nAs colunas dos jogadores foram renomeadas e a coluna que contém nomes de mais de um jogador foram separadas em três variáveis.\n\n# Renomeia colunas para facilitar o pré-processamento\ndat_v1 <- dat %>%\n  rename(\n    Jogadores = Jogadore.a.s,\n    Jogador_4 = Jogadore.a.s.1\n  )\n# Separa os jogadores em colunas distintas\ndat_v2 <- dat_v1 %>%\n  separate(Jogadores, c(\"Jogador_1\", \"Jogador_2\", \"Jogador_3\"), sep = \",\")\n\nHá nomes de jogadores repetidos (Alejandro, Carlos e Paula) em algumas das sete primeiras linhas.\n\n\n\nAssim, considerando que não há mais de um jogador com o mesmo nome as células com nomes repetidos foram transformadas em NA.\n\n# Adiciona NA nos nomes duplicados\ndat_v2$Jogador_4[1] <- NA # Alejandro\ndat_v2$Jogador_4[3] <- NA # Carlos\ndat_v2$Jogador_4[7] <- NA # Paula\n\nOs nomes com caracteres diferentes do esperado são corrigidos e as células sem informação substituídas por NA.\n\n# Corrige nomes com caracteres diferentes do esperado\ndat_v3 <- dat_v2 %>%\n  mutate(\n    across(-Partida, ~ str_replace_all(., c(\n      \"alejandro\" = \"Alejandro\",\n      \"alejandro\\\\*\" = \"Alejandro\",\n      \"Ariana\\\\*\" = \"Ariana\",\n      \"LÃºcia\" = \"Lucia\",\n      \"Juam\" = \"Juan\",\n      \"ALEJANDRO\" = \"Alejandro\",\n      \"GANHOU\" = \"Ganhou\",\n      \"Alejandro\\\\*\" = \"Alejandro\"\n    ))) %>%\n      mutate_all(na_if, \"\") # subs esp. em branco por NA\n  ) %>%\n  select(-c(\"Partida\", \"X\"))\n\nA função get_pnames extrai os nomes de todos os jogadores disponíveis nos dados. Os dados foram ordenados de modo que cada jogador seja uma coluna e a ocorrência deste em uma partida é preenchido com 1 e a ausência com 0. De modo similar, na coluna resultado a ocorrência de uma vitória é caracterizada pelo número 1 e a derrota por 0. A função get_fdata retorna as colunas dos jogadores neste formato.\n\nget_pnames <- function(data) {\n  # Retorna nomes dos jogadores\n  data %>%\n    distinct(Jogador_1) %>%\n    pull()\n}\nget_fdata <- function(data, nome) {\n  # Retorna os dados mais uma coluna com o nome do jogador\n  # Preenchidas com 1 (presença) e 0 (ausência).\n  dat_bin <- data %>%\n    mutate(\n      !!as.character(nome) := across(\n        starts_with(\"Jogador\"),\n        ~ if_else(grepl(nome, .), 1, 0)\n      )\n    )\n  datbin_v2 <- dat_bin %>%\n    mutate(\n      !!as.character(nome) := rowSums(select(., contains(nome)))\n    ) %>%\n    pull(!!as.character(nome)) %>%\n    as_tibble(.)\n\n  datbin_v2 %>%\n    rename(!!as.character(nome) := value)\n}\n\nAs funções para o tratamento dos dados são usadas e são aplicadas as\nmudanças finais da coluna resultado como a transformação de “Ganhou” para 1 e “Perdeu” para 0, além da transformação das variáveis para a classe fator, necessário para aplicação do algoritmo de mineração usado.\n\n# Nome dos jogadores\nnomes <- get_pnames(dat_v3)\n  # Tratamento dos dados para o formato das transações\n# Retorna dado + nomes dos jogadores preenchidos com 1 e 0\ndat_v4 <- dat_v3\nfor (jogador in nomes) {\n  dat_v4 <- dat_v4 %>%\n    add_column(get_fdata(., jogador))\n}\n# Vitória = 1 Derrota = 0\ndat_v5 <- dat_v4 %>%\n  mutate(\n    across(starts_with(\"Resultado\"), ~ if_else(grepl(\"Ganhou\", .), 1, 0))\n  ) %>%\n  select(all_of(nomes), Resultado)\n# Transformação das colunas para fator\ndat_v6 <- dat_v5 %>%\n  mutate(across(everything(), .fns = as.factor))\n\n# Exporta e importa o csv\n#write_csv(dat_v6,\"assoc_p.csv\")\n# Importa csv\n#dat_v6 <- read_csv(\"assoc_p.csv\") %>% \n# mutate(across(everything(), .fns = as.factor))\n\n#str(dat_v6)"
+  },
+  {
+    "objectID": "posts/28-05-2023-apriori/index.html#aplicação-do-algoritmo-apriori",
+    "href": "posts/28-05-2023-apriori/index.html#aplicação-do-algoritmo-apriori",
+    "title": "Apriori algorithm - Association mining rule",
+    "section": "Aplicação do algoritmo Apriori",
+    "text": "Aplicação do algoritmo Apriori\nA mineração dos itens e das regras foi feita através do algoritmo Apriori que trabalha através da busca de itens frequentes dado um suporte e confiança mínima. O Apriori permite reduzir o número de itens que serão analisados para gerar as regras de associação.\nOs critérios usados foram o suporte de \\(10\\%\\) e confiança mínima de \\(60\\%\\). Inicialmente, há o interesse de descobrir combinações de jogadores resultaram em vitória. Isto foi feito definindo o lado rhs = \"Resultado=1\", (vitórias) em um dos parâmetros da função apriori.\n\nregras <- apriori(dat_v6,\n  parameter = list(\n    supp = 0.1,\n    conf = 0.6,\n    minlen = 2,\n    #maxlen = 10,\n    target = \"rules\"\n  ),\n  appearance = list(\n    default = \"lhs\",\n    rhs = \"Resultado=1\"\n  )\n)\n\n#inspect(regras)\n\n#reg1_df <- as(regras,\"data.frame\")\n# reg1_df %>% \n#   arrange(desc(support,confidence)) %>% View()\n\nOs resultados são filtrados para os jogadores que estavam presentes na partida (LHS = 1). Para melhorar a visualização as regras são transformadas em um quadro de dados ordenados pelos maiores valores de lift.\n\n# Regras com lhs = 1 e Resultado=1\nreg1_lhs1 <- regras[sapply(as(items(regras), \"list\"), function(x) all(grepl(\"=1$\", x)))]\n# Combinações vencedoras\nr1lhs1_df <- as(reg1_lhs1,\"data.frame\") %>% \n  arrange(desc(confidence)) \n(r1lhs1_df)\n\nO jogador Alejandro obteve a vitória em \\(66\\%\\) das partidas que participou, tendo participado em cerca de \\(28\\%\\) do total de partidas. A melhor dupla é formada por Paula e Alejandro, que obtiveram a vitória em \\(72\\%\\) das partidas que participaram e estiveram presentes em cerca de \\(12\\%\\) do total de partidas.\nOs jogadore com os piores resultados é encontrado filtrando as regras para rhs = \"Resultado=0\" na função apriori e selecionando os jogadores que estiveram presentes nestas derrotas (LHS = 1). Fora o rhs, os outros parâmetros não foram alterados.\n\nregras_perd <- apriori(dat_v6,\n  parameter = list(\n    supp = 0.1,\n    conf = 0.2,\n    minlen = 2,\n    #maxlen = 10,\n    target = \"rules\"\n  ),\n  appearance = list(\n    default = \"lhs\",\n    rhs = \"Resultado=0\"\n  )\n)\n#inspect(regras_perd)\nreg0_df <- as(regras_perd,\"data.frame\")\n# reg0_df %>% \n#   arrange(desc(support,confidence)) %>% View()\n\nOs resultados são filtrados para as associações com no máximo um jogador, isto foi feito a partir do controle de caracteres de cada string. Por fim, é verificado que os resultados que apresentam os jogadores presentes (LHS=1) estão nas últimas sete linhas.\n\nreg0_df %>% \n   # Filtra LHS com no máximo um jogador\n  filter(str_length(rules) < 32) %>%\n  arrange(desc(support),desc(confidence)) %>% \n  filter(row_number() >= (n() - 6))"
   }
 ]

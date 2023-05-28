@@ -1,0 +1,16 @@
+/*-- scss:defaults --*/
+
+$black: #2E3440 !default;
+ 
+
+
+$primary: #2E3440 !default;
+$font-family-base: 'Source Sans Pro', 'Lato', 'Merriweather', 'Roboto Regular'!default;
+$body-color: $gray-700 !default;
+$headings-font-family: 'Prata', 'Roboto', 'Playfair Display' !default;
+
+/*-- scss:roles --*/
+
+#title-block-header.quarto-title-block.default .quarto-title .title {
+    font-family:"Oleo Script", $headings-font-family;
+}

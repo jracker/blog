@@ -5,7 +5,7 @@ project:
 website:
   title: ""
   navbar:
-    logo: "assets/owl.png"
+    logo: "assets/reading.png"
     right:
       - index.qmd
       - about.qmd
